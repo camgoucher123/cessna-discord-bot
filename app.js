@@ -103,7 +103,8 @@ client.on('message', message => {
     };
 
     if(message.content.startsWith(prefix+'help')){
-      message.channel.send({embed: {
+      message.reply("A DM has been sent to you for help!")
+      message.author.send({embed: {
         color: 3447003,
         title: "Basic Commands",
         description: "All commands must begin with the prefix (-)",

@@ -41,7 +41,7 @@ client.on('messageDelete', function(m){
 
 client.on('guildMemberAdd',member =>{
 	let guild = member.guild;
-	guild.channels.get(general).send(`Welcome, ${member.user.username} to Corner Cafe Official Discord! Have a good time here! :wink:`)
+	guild.channels.get(general).send(`Welcome, ${member.user.username} to Cessna RBLX Official Discord! Have a good time here! :wink:`)
 })
 client.on('guildMemberRemove',member =>{
 	let guild = member.guild;
@@ -103,7 +103,34 @@ client.on('message', message => {
     };
 
     if(message.content.startsWith(prefix+'help')){
-      message.reply("Sorry! The bot is currently being developed, come back later!")
+      message.channel.send({embed: {
+        color: 3447003,
+        title: "Basic Commands",
+        description: "All commands must begin with the prefix (-)",
+        fields: [{
+       name: "help",
+       value: "Gives you this menu!"
+     },
+     {
+       name: "urban",
+       value: "Search your definition on the Urban Dictionary! -urban [definition]"
+
+     },
+     {
+       name: "ping",
+       value: "Pong!"
+
+     },
+     {
+       name: "invite",
+       value: "Gives you the invite code to the server!"
+
+     },
+     {
+       name: "???",
+       value: "??? (coming soon)"
+     }]
+      }})
     } else
     if(message.content.startsWith(prefix+'ping')) {
 message.channel.send('Pinging!').then(m => m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`) );
@@ -112,7 +139,10 @@ message.channel.send('Pinging!').then(m => m.edit(`Pong! Latency is ${m.createdT
 		let question = args[1];
 		if(!question) return message.channel.send("You must provide something to search!")
 		message.reply("The definition for, " + args[1] + ' is this: http://www.urbandictionary.com/define.php?term='+ args[1])
-}
+} else
+  if(message.content.startsWith(prefix+'invite')){
+    message.reply("The Discord invite code is: https://discord.gg/pcwKKEr")
+  }
 
 });
 

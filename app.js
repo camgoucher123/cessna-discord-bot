@@ -1,10 +1,91 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-
+var general = "373683685775376386"
+var cessnabotlog = "377912394946445313"
 client.on('ready',() => {
   console.log('Cessna Bot Online')
   client.user.setGame('Type -help for help!')
 })
+client.on('messageDelete', function(m){
+  let ch = m.channel
+	let guild = ch.guild
+	guild.channels.get(cessnabotlog).send({embed: {
+	    color: 3447003,
+	    author: {
+	      name: m.author.username,
+	      icon_url: m.author.avatarURL
+	    },
+	    title: "Message Deleted",
+	    description: "**Message Deleted Logs**",
+	    fields: [{
+	        name: "Message",
+	        value: ("Message: ***\"" + m + "\"***")
+	      },
+	      {
+	        name: "Author",
+	        value: ("Author: ***"+ m.author.username+"***")
+	      },
+	      {
+	        name: "Channel",
+	        value: ("Channel: "+ ch)
+	      }
+	    ],
+	    timestamp: new Date(),
+	    footer: {
+	      icon_url: client.user.avatarURL,
+	      text: "©Cessna Of RBLX Bot Logs"
+	    }
+	  }
+	});
+})
+
+client.on('guildMemberAdd',member =>{
+	let guild = member.guild;
+	guild.channels.get(general).send(`Welcome, ${member.user.username} to Corner Cafe Official Discord! Have a good time here! :wink:`)
+})
+client.on('guildMemberRemove',member =>{
+	let guild = member.guild;
+	guild.channels.get(general).send(`Well, ${member.user.username} just left the Discord.. :sob:`)
+})
+
+client.on('messageUpdate', function(oldm,newm){
+	if(oldm.content === newm.content) return;
+  let ch = oldm.channel
+	let guild = oldm.guild
+	guild.channels.get(cessnabotlog).send({embed: {
+	    color: 3447003,
+	    author: {
+	      name: oldm.author.username,
+	      icon_url: oldm.author.avatarURL
+	    },
+	    title: "Message Edited",
+	    description: "**Message Update Logs**",
+	    fields: [{
+	        name: "Old Message",
+	        value: ("Old Message: ***\"" + oldm + "\"***")
+	      },
+				{
+		        name: "New Message",
+		        value: ("New Message: ***\"" + newm + "\"***")
+		      },
+	      {
+	        name: "Author",
+	        value: ("Author: ***"+ oldm.author.username+"***")
+	      },
+	      {
+	        name: "Channel",
+	        value: ("Channel: "+ ch)
+	      }
+	    ],
+	    timestamp: new Date(),
+	    footer: {
+	      icon_url: client.user.avatarURL,
+	      text: "© Cessna Of RBLX Bot Logs"
+	    }
+	  }
+	});
+})
+
 
 
 var prefix = "-"
@@ -34,6 +115,5 @@ message.channel.send('Pinging!').then(m => m.edit(`Pong! Latency is ${m.createdT
 }
 
 });
-
 
 client.login(process.env.BOT_TOKEN);

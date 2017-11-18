@@ -225,6 +225,7 @@ message.channel.send('Pinging!').then(m => m.edit(`Pong! Latency is ${m.createdT
                 message.member.removeRole(yellow,"ColorChange")
                   message.member.removeRole(pink,"ColorChange")
                   message.member.removeRole(cyan,"ColorChange")
+		   message.member.removeRole(black,"ColorChange")
               message.reply("Your name color has been removed")
             } else{
               message.reply("Invalid color, Say \"-listcolors\" To view the colors")

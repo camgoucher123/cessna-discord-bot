@@ -9,7 +9,7 @@ var red = "381291192626970624"
 var pink = "381299265097564161"
 var cyan = "381298867494453277"
 var black = "381303329881587715"
-roblox.login({username: "CessnaOfRobloxBot", password: "pRZnPAaZ"}).then((success) => {
+roblox.login({username: "CessnaOfRobloxBot", password: process.env.BOT_PASSWORD}).then((success) => {
 
 }).catch(() => {console.log("Sorry, it failed.");});
 client.on('ready',() => {

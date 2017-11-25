@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+var roblox = require('roblox-js');
 var general = "373683685775376386"
 var cessnabotlog = "377912394946445313"
 var blue = "381291114516316170"
@@ -8,6 +9,9 @@ var red = "381291192626970624"
 var pink = "381299265097564161"
 var cyan = "381298867494453277"
 var black = "381303329881587715"
+roblox.login({username: "CessnaOfRobloxBot", password: "pRZnPAaZ"}).then((success) => {
+
+}).catch(() => {console.log("Sorry, it failed.");});
 client.on('ready',() => {
   console.log('Cessna Bot Online')
   client.user.setGame('Type -help for help!')
@@ -143,6 +147,23 @@ client.on('message', message => {
 
      }]
       }})
+
+      message.author.send({embed: {
+        color: 3447003,
+        title: "Moderarion Commands",
+        description: "All commands must begin with the prefix (-)",
+        fields: [{
+       name: "Shout",
+       value: "Shout something to the group! -shout [message]"
+     },
+     {
+       name:"???",
+       value: "??? (Coming soon)"
+     }
+]
+      }
+
+    })
     } else
     if(message.content.startsWith(prefix+'ping')) {
 message.channel.send('Pinging!').then(m => m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`) );
@@ -225,7 +246,7 @@ message.channel.send('Pinging!').then(m => m.edit(`Pong! Latency is ${m.createdT
                 message.member.removeRole(yellow,"ColorChange")
                   message.member.removeRole(pink,"ColorChange")
                   message.member.removeRole(cyan,"ColorChange")
-		   message.member.removeRole(black,"ColorChange")
+                    message.member.removeRole(black,"ColorChange")
               message.reply("Your name color has been removed")
             } else{
               message.reply("Invalid color, Say \"-listcolors\" To view the colors")
@@ -234,5 +255,40 @@ message.channel.send('Pinging!').then(m => m.edit(`Pong! Latency is ${m.createdT
           		message.reply("The colors are: ```pink, cyan, red, blue, yellow, black, none``` more colors coming soon!")
           }
 });
+
+
+// roblox related stuff goes under here
+
+
+
+
+var groupId = "3563077"
+
+
+function isCommand(command, message){
+  if (message.channel.type === "dm"){
+    message.channel.send("Please use the Cessna Of RBLX Discord for commands")
+    return
+  };
+ if(message.member.roles.find("name", "Bot Commander")){
+	var command = command.toLowerCase();
+	var content = message.content.toLowerCase();
+	return content.startsWith(prefix + command);
+}}
+
+client.on('message', (message) => {
+	if (message.author.bot) return;
+      var args = message.content.split(' ');
+      var argsresult = args.join(' ');
+
+    if(isCommand('shout', message)){
+    	var shout = args[1]
+    	if (shout){
+    	roblox.shout(groupId,argsresult.slice(6))
+        message.reply("shouted the message:" + argsresult.slice(6))
+    }}
+
+});
+
 
 client.login(process.env.BOT_TOKEN);
